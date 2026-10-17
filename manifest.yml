@@ -1,0 +1,11 @@
+---
+applications:
+  - name: outbound-ewm-agent
+    buildpacks:
+      - python_buildpack
+    instances: 1
+    memory: 64M
+    disk_quota: 512M
+    command: gunicorn --worker-class uvicorn.workers.UvicornWorker --workers 2 --bind 0.0.0.0:$PORT --chdir app main:application
+    env:
+      CORS_ALLOW_ORIGINS: "*"
